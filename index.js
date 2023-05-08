@@ -38,6 +38,7 @@ function runPythonFile(fileName) {
 }
 
 app.get('/', function(req, res) {
+  res.set({'access-control-allow-origin':'*'});
   res.send('<h1>Lime Notifier Backend Server</h1>');
 })
 
@@ -53,16 +54,19 @@ app.get('/hotdeal', async (req, res) => {
 })
 
 app.get('/naver', function(req, res) {
+  res.set({'access-control-allow-origin':'*'});
   res.send('<a href=\'https://naver.com\'>Naver Response</a>');
 })
 
 app.get('/kakao', function(req, res) {
+  res.set({'access-control-allow-origin':'*'});
   res.send('Kakao Response !!');
 })
 
 app.get('/flight', async (req, res) => {
   try {
     const result = await runPythonFile('./python/flight.py');
+    res.set({'access-control-allow-origin':'*'});
     res.send({result});
   } catch (err) {
     console.error(err);
