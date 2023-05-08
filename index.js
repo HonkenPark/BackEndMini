@@ -53,7 +53,7 @@ app.get('/kakao', function(req, res) {
   res.send('Kakao Response !!');
 })
 
-app.get('/kayak', async (req, res) => {
+app.get('/flight', async (req, res) => {
   try {
     const result = await runPythonFile('./python/flight.py');
     res.send({result});
