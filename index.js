@@ -37,7 +37,7 @@ app.get('/', function(req, res) {
 
 app.get('/hotdeal', async (req, res) => {
   try {
-    const result = await runPythonFile('hotdeal.py');
+    const result = await runPythonFile('./python/hotdeal.py');
     res.send({result});
   } catch (err) {
     console.error(err);
@@ -55,7 +55,7 @@ app.get('/kakao', function(req, res) {
 
 app.get('/kayak', async (req, res) => {
   try {
-    const result = await runPythonFile('waitKayak.py');
+    const result = await runPythonFile('./python/flight.py');
     res.send({result});
   } catch (err) {
     console.error(err);
