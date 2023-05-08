@@ -6,7 +6,9 @@ const { spawn } = require('child_process');
 
 function runPythonFile(fileName) {
   return new Promise((resolve, reject) => {
-    const process = spawn('python', [fileName]);
+    const process = spawn('python', [fileName], {
+      env: { PYTHONIOENCODING: 'utf-8' }
+    });
     
     let result = '';
     process.stdout.on('data', (data) => {
