@@ -1,5 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
+
+let corsOptions = {
+  origin: '*',
+  credential: true
+}
 
 
 const { spawn } = require('child_process');
@@ -63,4 +69,5 @@ app.get('/flight', async (req, res) => {
   }
 })
 
+app.use(cors(corsOptions));
 app.listen(3001);
