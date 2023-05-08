@@ -1,6 +1,9 @@
 const express = require('express');
-const app = express();
+const https = require('https');
+const fs = require('fs');
 
+const app = express();
+const port = 3001;
 
 const { spawn } = require('child_process');
 
@@ -28,6 +31,11 @@ function runPythonFile(fileName) {
     });
   });
 }
+
+const sslServerOptions = {
+  key: fs.readFileSync('D:\\data\\selfCert\\server.key'),
+  cert: fs.readFileSync('D:\\data\\selfCert\\server.crt')
+};
 
 app.get('/', function(req, res) {
   res.send('<h1>Lime Notifier Backend Server</h1>');
@@ -61,4 +69,8 @@ app.get('/flight', async (req, res) => {
   }
 })
 
-app.listen(3001);
+https.createServer(sslServerOptions, app).listen(port, ()=>{
+  console.log(`Lime Notifier Server is running on port ${port}`);
+})
+
+// app.listen(3001);
