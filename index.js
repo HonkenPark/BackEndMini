@@ -1,13 +1,8 @@
 const express = require('express');
-const cors = require('cors');
 const app = express();
 
-app.use(cors());
 
 const { spawn } = require('child_process');
-
-const https = require('https');
-const url = "https://www.kayak.co.kr/flights/ICN-SPN/2023-07-29/2023-08-02/2adults/children-11?sort=bestflight_a"; // GET 요청을 보낼 URL
 
 function runPythonFile(fileName) {
   return new Promise((resolve, reject) => {
