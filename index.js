@@ -44,6 +44,7 @@ app.get('/', function(req, res) {
 app.get('/hotdeal', async (req, res) => {
   try {
     const result = await runPythonFile('./python/hotdeal.py');
+    res.set({'access-control-allow-origin':'*'});
     res.send({result});
   } catch (err) {
     console.error(err);
