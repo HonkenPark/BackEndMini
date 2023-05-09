@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const axois = require('axois')
 const app = express();
 
 let corsOptions = {
@@ -19,17 +20,14 @@ function runPythonFile(fileName) {
     let result = '';
     process.stdout.on('data', (data) => {
       result += data.toString();
-      console.log(result)
     });
 
     process.stderr.on('data', (err) => {
-      console.log('1')
       reject(err.toString());
     });
 
     process.on('close', (code) => {
       if (code !== 0) {
-        console.log('2')
         reject(`Failed with code ${code}`);
       }
       resolve(result);
@@ -61,6 +59,18 @@ app.get('/naver', function(req, res) {
 app.get('/kakao', function(req, res) {
   res.set({'access-control-allow-origin':'*'});
   res.send('Kakao Response !!');
+})
+
+app.get('/currency', function(req, res) {
+  axios.get(url)
+  .then(response => {
+    console.log(response.data);
+    res.set({'access-control-allow-origin':'*'});
+    res.send(response.data);
+  })
+  .catch(error => {
+    console.error(error);
+  });
 })
 
 app.get('/flight', async (req, res) => {
