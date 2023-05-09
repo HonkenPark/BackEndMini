@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const axois = require('axois')
+const axios = require('axios')
 const app = express();
 
 let corsOptions = {
@@ -62,7 +62,17 @@ app.get('/kakao', function(req, res) {
 })
 
 app.get('/currency', function(req, res) {
-  axios.get(url)
+  console.log(req.query.authkey);
+  console.log(req.query.searchdate);
+  console.log(req.query.data);
+
+  axios.get(req.query.url, {
+    params: {
+      authkey: req.query.authkey,
+      searchdate: req.query.searchdate,
+      data: req.query.data
+    }
+  })
   .then(response => {
     console.log(response.data);
     res.set({'access-control-allow-origin':'*'});
