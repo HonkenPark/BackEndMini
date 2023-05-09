@@ -1,9 +1,15 @@
 import requests
 import pprint
 import json
+import sys
 
 def main():
-    url = 'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=QFbn3uFi2qt75VOXPvnnGxuVirl8XfgP&searchdate=20230509&data=AP01'
+    url = sys.argv[1]
+    authkey = sys.argv[2]
+    searchdate = sys.argv[3]
+    data = sys.argv[4]
+
+    url = '{}?authkey={}&searchdate={}&data={}'.format(url, authkey, searchdate, data);
     response = requests.get(url)
     contents = response.text
     return contents

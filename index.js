@@ -10,12 +10,12 @@ let corsOptions = {
 
 const { spawn } = require('child_process');
 
-function runPythonFile(fileName) {
+function runPythonFile(fileName, params) {
   return new Promise((resolve, reject) => {
-    const process = spawn('python', [fileName], {
+    const process = spawn('python', [fileName].concat(params), {
       env: { PYTHONIOENCODING: 'utf-8' }
     });
-    
+
     let result = '';
     process.stdout.on('data', (data) => {
       result += data.toString();
@@ -41,7 +41,7 @@ app.get('/', function(req, res) {
 
 app.get('/hotdeal', async (req, res) => {
   try {
-    const result = await runPythonFile('./python/hotdeal.py');
+    const result = await runPythonFile('./python/hotdeal.py', '');
     res.set({'access-control-allow-origin':'*'});
     res.send({result});
   } catch (err) {
@@ -61,8 +61,11 @@ app.get('/kakao', function(req, res) {
 })
 
 app.get('/currency', async (req, res) => {
+  let path = './python/currency.py';
+  let param = [req.query.url, req.query.authkey, req.query.searchdate, req.query.data];
+
   try {
-    const result = await runPythonFile('./python/currency.py');
+    const result = await runPythonFile(path, param);
     res.set({'access-control-allow-origin':'*'});
     res.send({result});
   } catch (err) {
@@ -73,7 +76,7 @@ app.get('/currency', async (req, res) => {
 
 app.get('/flight', async (req, res) => {
   try {
-    const result = await runPythonFile('./python/flight.py');
+    const result = await runPythonFile('./python/flight.py', '');
     res.set({'access-control-allow-origin':'*'});
     res.send({result});
   } catch (err) {
