@@ -18,7 +18,7 @@ chrome_options.add_argument("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x
 chrome_options.add_argument("--window-size=1920,1080")  # window-size 설정
 
 # 크롬 드라이버 위치 설정
-service = Service('D:/data/chromedriver.exe')
+service = Service('D:\\data\\chromedriver.exe')
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
 # 주소 접근
