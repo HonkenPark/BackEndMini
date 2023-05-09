@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const axios = require('axios')
 const app = express();
 
 let corsOptions = {
@@ -61,26 +60,15 @@ app.get('/kakao', function(req, res) {
   res.send('Kakao Response !!');
 })
 
-app.get('/currency', function(req, res) {
-  console.log(req.query.authkey);
-  console.log(req.query.searchdate);
-  console.log(req.query.data);
-
-  axios.get(req.query.url, {
-    params: {
-      authkey: req.query.authkey,
-      searchdate: req.query.searchdate,
-      data: req.query.data
-    }
-  })
-  .then(response => {
-    console.log(response.data);
+app.get('/currency', async (req, res) => {
+  try {
+    const result = await runPythonFile('./python/currency.py');
     res.set({'access-control-allow-origin':'*'});
-    res.send(response.data);
-  })
-  .catch(error => {
-    console.error(error);
-  });
+    res.send({result});
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal server error');
+  }
 })
 
 app.get('/flight', async (req, res) => {
