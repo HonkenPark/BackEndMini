@@ -7,7 +7,7 @@ let corsOptions = {
   credential: true
 }
 
-
+const TelegramBotAPI = require('telegram-bot-api');
 const { spawn } = require('child_process');
 
 function runPythonFile(fileName, params) {
@@ -83,6 +83,26 @@ app.get('/flight', async (req, res) => {
     console.error(err);
     res.status(500).send('Internal server error');
   }
+})
+
+app.get('/sendTelegramMsg', (req, res) => {
+  const token = req.query.token;
+  const chatId = req.query.chatId;
+  const message = req.query.message;
+
+  const api = new TelegramBotAPI({
+    token: token
+  });
+
+  api.sendMessage({
+    chat_id: chatId,
+    text: message
+  }).then(response => {
+    res.send('Message sent!');
+  }).catch(error => {
+    console.log(error);
+    res.send('Error sending message!');
+  });
 })
 
 app.use(cors(corsOptions));
