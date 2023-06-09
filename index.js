@@ -1,3 +1,6 @@
+const cron = require('node-cron');
+const path = require('path');
+const { exec } = require('child_process');
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -104,6 +107,20 @@ app.get('/sendTelegramMsg', (req, res) => {
     res.send('Error sending message!');
   });
 })
+
+// 특정 시간에 실행될 cron 작업 정의
+cron.schedule('22 12 * * *', () => {
+  // 쉘 명령어 실행
+  const scriptPath = path.join(__dirname, 'script', 'slp_login.sh');
+  console.log(__dirname);
+  exec(scriptPath, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error: ${error}`);
+    } else {
+      console.log(`Result: ${stdout}`);
+    }
+  });
+});
 
 app.use(cors(corsOptions));
 app.listen(3001);
