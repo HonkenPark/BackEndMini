@@ -6,7 +6,7 @@ export LANG="ko_KR.UTF-8"
 url="https://www.eduslp.ac.kr/member/login_ok.php"
 
 # POST 요청에 사용할 데이터
-data="USER_ID=limepark&PWD=PhkSjh0715%21%21"
+data="USER_ID=limepark&PWD=PhkSjh071521212020"
 
 # cURL 명령어 실행
 # curl -X POST -d "$data" "$url"
