@@ -113,7 +113,6 @@ app.get('/sendTelegramMsg', (req, res) => {
 cron.schedule('10 0 * * *', () => {
   // 쉘 명령어 실행
   const scriptPath = path.join(__dirname, 'script', 'slp_login.sh');
-  console.log(__dirname);
   exec(scriptPath, (error, stdout, stderr) => {
     if (error) {
       console.error(`Error: ${error}`);
