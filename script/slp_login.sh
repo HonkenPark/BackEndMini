@@ -9,6 +9,4 @@ url="https://www.eduslp.ac.kr/member/login_ok.php"
 data="USER_ID=limepark&PWD=PhkSjh071521212020"
 
 # cURL 명령어 실행
-# curl -X POST -d "$data" "$url"
-response=$(curl -X POST -d "$data" "$url")
-echo "$response"
+curl -X POST -d "$data" "$url"
