@@ -38,6 +38,22 @@ function runPythonFile(fileName, params) {
   });
 }
 
+function ImAlive() {
+  const api = new TelegramBotAPI({
+    token: '83255752826181:AAFr2i46cjgH3mzj1nDR8uKvGKiHoDGsduEWytT'
+  });
+
+  api.sendMessage({
+    chat_id: '753156180818249137',
+    text: 'LimeNotifier Backend Server is running well👍'
+  }).then(response => {
+    console.log('Message sent!');
+  }).catch(error => {
+    console.log(error);
+    console.log('Error sending message!');
+  });
+}
+
 app.get('/', function(req, res) {
   res.set({'access-control-allow-origin':'*'});
   res.send('<h1>Lime Notifier Backend Server</h1>');
@@ -118,6 +134,14 @@ cron.schedule('10 0 * * *', () => {
       console.error(`Error: ${error}`);
     }
   });
+});
+
+cron.schedule('30 10 * * *', () => {
+  ImAlive();
+});
+
+cron.schedule('30 22 * * *', () => {
+  ImAlive();
 });
 
 app.use(cors(corsOptions));
