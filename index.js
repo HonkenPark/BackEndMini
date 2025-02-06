@@ -61,9 +61,46 @@ function ImAlive() {
     });
 }
 
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "images")));
 app.get("/", function (req, res) {
   res.set({ "access-control-allow-origin": "*" });
-  res.send("<h1>Lime Notifier Backend Server</h1>");
+  res.send(
+    '<html>\
+  <head>\
+      <title>MZLP</title>\
+      <style>\
+          body {\
+              margin: 0;\
+              padding: 0;\
+              background-color: #3F3F3F;\
+              display: flex;\
+              justify-content: center;\
+              align-items: center;\
+              height: 100vh;\
+              font-family: Arial, sans-serif;\
+          }\
+          \
+          .content {\
+              text-align: center;\
+              color: #fff; /* 흰색 텍스트 색상 */\
+          }\
+          \
+          .image {\
+              max-width: 300px;\
+              margin-bottom: 20px;\
+          }\
+      </style>\
+  </head>\
+  <body>\
+      <div class="content">\
+          <img class="image" src="/lime_ci.png" alt="LimeNotifier Logo">\
+          <h1>Lime Notifier</h1>\
+          <p>안녕하세요. Lime Notifier의 백엔드 페이지입니다.</p>\
+      </div>\
+  </body>\
+  </html>'
+  );
 });
 
 app.get("/hotdeal", async (req, res) => {
