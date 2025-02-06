@@ -44,12 +44,12 @@ function runPythonFile(fileName, params) {
 
 function ImAlive() {
   const api = new TelegramBotAPI({
-    token: "83255752826181:AAFr2i46cjgH3mzj1nDR8uKvGKiHoDGsduEWytT",
+    token: "",
   });
 
   api
     .sendMessage({
-      chat_id: "753156180818249137",
+      chat_id: "",
       text: "LimeNotifier Backend Server is running well👍",
     })
     .then((response) => {
