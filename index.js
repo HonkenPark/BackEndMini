@@ -1,10 +1,14 @@
 const path = require("path");
+const fs = require("fs");
 const cron = require("node-cron");
 const { exec } = require("child_process");
 
 const express = require("express");
 const cors = require("cors");
 const app = express();
+
+const telegram_token = "";
+const telegram_checkId = "";
 
 let corsOptions = {
   origin: "*",
@@ -40,12 +44,12 @@ function runPythonFile(fileName, params) {
 
 function ImAlive() {
   const api = new TelegramBotAPI({
-    token: "",
+    token: "83255752826181:AAFr2i46cjgH3mzj1nDR8uKvGKiHoDGsduEWytT",
   });
 
   api
     .sendMessage({
-      chat_id: "",
+      chat_id: "753156180818249137",
       text: "LimeNotifier Backend Server is running well👍",
     })
     .then((response) => {
