@@ -43,7 +43,45 @@ func imAlive() {
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Write([]byte("<h1>Lime Notifier Backend Server</h1>"))
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+	html := `<!DOCTYPE html>
+			<html lang="ko">
+			<head>
+				<meta charset="UTF-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<title>LimeNotifier</title>
+				<style>
+					body {
+						margin: 0;
+						padding: 0;
+						background-color: #3F3F3F;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						height: 100vh;
+						font-family: Arial, sans-serif;
+					}
+					.content {
+						text-align: center;
+						color: #fff;
+					}
+					.image {
+						max-width: 300px;
+						margin-bottom: 20px;
+					}
+				</style>
+			</head>
+			<body>
+				<div class="content">
+					<img class="image" src="/lime_ci.png" alt="LimeNotifier Logo">
+					<h1>Lime Notifier</h1>
+					<p>안녕하세요. Lime Notifier의 백엔드 페이지입니다.</p>
+				</div>
+			</body>
+			</html>`
+
+	fmt.Fprint(w, html)
 }
 
 func hotdealHandler(w http.ResponseWriter, r *http.Request) {
